@@ -9,29 +9,33 @@ const upComingMovieEndpoint = `${baseUrl}/movie/upcoming/?api_key=${apiKey}`
 const topRatedMoviesEndPoint = `${baseUrl}/movie/top_rated?api_key=${apiKey}`
 
 
-const apiCall = async (endpoint, params) =>{
+export const image500 = path => path ? `https://image.tmdb.org/t/p/w500/${path}` : null;
+export const image342 = path => path ? `https://image.tmdb.org/t/p/w342/${path}` : null;
+export const image185 = path => path ? `https://image.tmdb.org/t/p/w185/${path}` : null;
+
+const apiCall = async (endpoint, params) => {
     const options = {
-        method:'GET',
-        url:endpoint,
-        params:params?params:{}
+        method: 'GET',
+        url: endpoint,
+        params: params ? params : {}
     }
-    
-    try{
+
+    try {
         const response = await axios.request(options)
         return response.data;
-    }catch (e) {
-       console.log('ERROR',e)
-       return {}
+    } catch (e) {
+        console.log('ERROR', e)
+        return {}
     }
 }
 
 
-export const fetchTrendingMovies = ()=>{
+export const fetchTrendingMovies = () => {
     return apiCall(trendingMovieEndpoint);
 }
-export const fetchUpComingMovies = ()=>{
+export const fetchUpComingMovies = () => {
     return apiCall(upComingMovieEndpoint);
 }
-export const fetchTopRatedMovies = ()=>{
+export const fetchTopRatedMovies = () => {
     return apiCall(topRatedMoviesEndPoint);
 }

@@ -26,14 +26,14 @@ export default function HomeScreen() {
         getTrendingMovies();
     }, []);
 
-    const getTrendingMovies = async ()=>{
+    const getTrendingMovies = async () => {
         const data = await fetchTrendingMovies();
-        console.log("got trending movies:" ,data);
+        console.log("got trending movies:", data);
 
-        if(data && data.results) setTrending(data.results)
-        // setLoading(false)
+        if (data && data.results) setTrending(data.results)
+        setLoading(false)
     }
-    
+
     return (
         <View className="flex-1 bg-neutral-800">
             {/*search bar and logo and hamburger*/}
@@ -42,9 +42,9 @@ export default function HomeScreen() {
                 <View className="flex-row justify-between item-center mx-4">
                     <Bars3CenterLeftIcon size="30" strokeWidth={2} color="white"/>
                     <Text className="text-white text-3xl font-bold">
-                        <Text style={styles.text}>M</Text>ovies
+                        <Text style={styles.text}>C</Text>inemate
                     </Text>
-                    <TouchableOpacity onPress={()=>navigation.navigate('Search')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Search')}>
                         <MagnifyingGlassIcon size="30" strokeWidth={2} color="white"/>
                     </TouchableOpacity>
                 </View>
@@ -52,12 +52,12 @@ export default function HomeScreen() {
 
 
             {
-                loading?(
+                loading ? (
                     <Loading/>
-                ):(
+                ) : (
                     <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 10}}>
                         {/* Trending Movies Carousel */}
-                        <TrendingMovies data={trending}/>
+                        {trending.length > 0 && <TrendingMovies data={trending}/>}
 
                         {/* Upcoming Movie*/}
                         <MovieList title="Upcoming" data={upComing}/>
